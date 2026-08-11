@@ -1,10 +1,10 @@
 # Assignment 2: Compare & Contrast — Dual Implementation of an Expense Approval Workflow
 
-**Student:** Bryan Edler
-**Student Number:** 041016930
-**Course:** CST8917 - Serverless Applications
-**Project Title:** Dual Implementation of an Expense Approval Pipeline: Durable Functions vs. Logic Apps
-**Date:** August 11, 2026
+**Student:** Bryan Edler  
+**Student Number:** 041016930  
+**Course:** CST8917 - Serverless Applications  
+**Project Title:** Dual Implementation of an Expense Approval Pipeline: Durable Functions vs. Logic Apps  
+**Date:** August 11, 2026  
 
 ---
 
