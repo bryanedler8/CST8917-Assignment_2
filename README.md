@@ -154,6 +154,10 @@ I would also choose Logic Apps for simple, straight-through workflows that don't
 
 ---
 
+
+##  Video Demo
+[Video Demo Link](https://youtu.be/63xIbwPnfe4)
+
 ## References
 
 1. Microsoft Learn. (2026). "Durable Functions Overview." https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview
