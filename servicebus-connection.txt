@@ -1,0 +1,1 @@
+Endpoint=sb://expense-sb-6642bf90.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YOUR_KEY_HERE
