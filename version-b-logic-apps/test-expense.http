@@ -1,0 +1,56 @@
+### Test 1: Valid expense under $100 (Auto-approve)
+# Generate SAS token first using the script below
+POST https://expense-sb-6642bf90.servicebus.windows.net/expense-requests/messages
+Content-Type: application/json
+Authorization: SharedAccessSignature sr=expense-sb-6642bf90.servicebus.windows.net%2Fexpense-requests&sig=YOUR_SIGNATURE&se=EXPIRY&skn=RootManageSharedAccessKey
+
+{
+    "employee_name": "John Doe",
+    "employee_email": "john@company.com",
+    "amount": 75.50,
+    "category": "meals",
+    "description": "Team lunch",
+    "manager_email": "manager@company.com"
+}
+
+### Test 2: Valid expense >= $100 (Manager approval needed)
+POST https://expense-sb-6642bf90.servicebus.windows.net/expense-requests/messages
+Content-Type: application/json
+Authorization: SharedAccessSignature sr=expense-sb-6642bf90.servicebus.windows.net%2Fexpense-requests&sig=YOUR_SIGNATURE&se=EXPIRY&skn=RootManageSharedAccessKey
+
+{
+    "employee_name": "Jane Smith",
+    "employee_email": "jane@company.com",
+    "amount": 350.00,
+    "category": "travel",
+    "description": "Flight to conference",
+    "manager_email": "manager@company.com"
+}
+
+### Test 3: Missing required fields (Validation error)
+POST https://expense-sb-6642bf90.servicebus.windows.net/expense-requests/messages
+Content-Type: application/json
+Authorization: SharedAccessSignature sr=expense-sb-6642bf90.servicebus.windows.net%2Fexpense-requests&sig=YOUR_SIGNATURE&se=EXPIRY&skn=RootManageSharedAccessKey
+
+{
+    "employee_name": "Test User",
+    "employee_email": "test@company.com"
+}
+
+### Test 4: Invalid category (Validation error)
+POST https://expense-sb-6642bf90.servicebus.windows.net/expense-requests/messages
+Content-Type: application/json
+Authorization: SharedAccessSignature sr=expense-sb-6642bf90.servicebus.windows.net%2Fexpense-requests&sig=YOUR_SIGNATURE&se=EXPIRY&skn=RootManageSharedAccessKey
+
+{
+    "employee_name": "Test User",
+    "employee_email": "test@company.com",
+    "amount": 50.00,
+    "category": "invalid_category_xyz",
+    "description": "Test description",
+    "manager_email": "manager@company.com"
+}
+
+### Helper: Generate SAS token for Authorization header
+# Run this command to get a valid SAS token:
+# python3 -c "import base64,hmac,hashlib,time,urllib.parse; namespace='expense-sb-6642bf90'; queue='expense-requests'; key='YOUR_KEY_HERE'; resource=f'{namespace}.servicebus.windows.net/{queue}'; expiry=int(time.time())+3600; string_to_sign=f'{resource}\n{expiry}'; signature=base64.b64encode(hmac.new(key.encode(),string_to_sign.encode(),hashlib.sha256).digest()).decode(); print(f'SharedAccessSignature sr={urllib.parse.quote_plus(resource)}&sig={urllib.parse.quote_plus(signature)}&se={expiry}&skn=RootManageSharedAccessKey')"

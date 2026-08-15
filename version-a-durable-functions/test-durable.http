@@ -1,0 +1,47 @@
+### Test 1: Valid expense under $100 (Auto-approve)
+POST http://localhost:7071/api/start
+Content-Type: application/json
+
+{
+    "employee_name": "John Doe",
+    "employee_email": "john@company.com",
+    "amount": 75.50,
+    "category": "meals",
+    "description": "Team lunch",
+    "manager_email": "manager@company.com"
+}
+
+### Test 2: Valid expense >= $100 (Manager approval needed)
+POST http://localhost:7071/api/start
+Content-Type: application/json
+
+{
+    "employee_name": "Jane Smith",
+    "employee_email": "jane@company.com",
+    "amount": 350.00,
+    "category": "travel",
+    "description": "Flight to conference",
+    "manager_email": "manager@company.com"
+}
+
+### Test 3: Missing fields (Validation error)
+POST http://localhost:7071/api/start
+Content-Type: application/json
+
+{
+    "employee_name": "Test User",
+    "employee_email": "test@company.com"
+}
+
+### Test 4: Invalid category (Validation error)
+POST http://localhost:7071/api/start
+Content-Type: application/json
+
+{
+    "employee_name": "Test User",
+    "employee_email": "test@company.com",
+    "amount": 50.00,
+    "category": "invalid_category",
+    "description": "Test description",
+    "manager_email": "manager@company.com"
+}
